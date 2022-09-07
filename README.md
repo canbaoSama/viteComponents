@@ -1,2 +1,3 @@
-# viteComponents
-vite 项目下的个人组件库
+# fes 模版
+
+内部测试用，不对外发布
