@@ -5,24 +5,27 @@ export default {
     access: {
         roles: {
             admin: ['*'],
-            manager: ['/']
-        }
+            manager: ['/'],
+        },
     },
     layout: {
         title: 'Fes.js',
-        footer: 'Created by MumbleFE',
+        footer: null,
         navigation: 'mixin',
         multiTabs: false,
         menus: [
             {
-                name: 'index'
-            }
-        ]
+                name: 'index',
+            },
+            {
+                name: 'imgLoading',
+            },
+        ],
     },
     enums: {
         status: [
             ['0', '无效的'],
-            ['1', '有效的']
-        ]
-    }
+            ['1', '有效的'],
+        ],
+    },
 };

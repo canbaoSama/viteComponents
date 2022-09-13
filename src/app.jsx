@@ -1,6 +1,8 @@
 import { access, defineRuntimeConfig } from '@fesjs/fes';
+import { Button } from 'ant-design-vue';
 import PageLoading from '@/components/PageLoading.vue';
 import UserCenter from '@/components/UserCenter.vue';
+import 'ant-design-vue/dist/antd.css';
 
 export default defineRuntimeConfig({
     layout: {
@@ -20,5 +22,8 @@ export default defineRuntimeConfig({
                 }, 1000);
             });
         },
+    },
+    onAppCreated: ({ app }) => {
+        app.use(Button);
     },
 });
