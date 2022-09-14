@@ -18,7 +18,9 @@ export default {
                 name: 'index',
             },
             {
-                name: 'imgLoading',
+                name: 'img',
+                title: '图片组件',
+                children: [{ name: 'getMajor' }, { name: 'cwebpBin' }],
             },
         ],
     },
