@@ -20,7 +20,7 @@ export default {
             {
                 name: 'img',
                 title: '图片组件',
-                children: [{ name: 'getMajor' }, { name: 'cwebpBin' }],
+                children: [{ name: 'getMajor' }, { name: 'cwebpBin' }, { name: 'potrace' }],
             },
         ],
     },

@@ -12,12 +12,12 @@ import { ref } from 'vue';
 
 defineRouteMeta({
     name: 'cwebpBin',
-    title: 'cwebp压缩',
+    title: 'cwebp加载替换',
 });
 
 const imgList = [
     {
-        pre: '/src/images/webp/1.webp',
+        pre: '/src/images/svg/1.svg',
         next: '/src/images/1.png',
     },
     {
@@ -45,6 +45,7 @@ const transitionend = () => {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    max-width: 780px;
     .img-container-list {
         position: relative;
         width: 49%;

@@ -1,5 +1,5 @@
 import { access, defineRuntimeConfig } from '@fesjs/fes';
-import { Button } from 'ant-design-vue';
+import { Button, InputNumber, Input, Popover } from 'ant-design-vue';
 import PageLoading from '@/components/PageLoading.vue';
 import UserCenter from '@/components/UserCenter.vue';
 import 'ant-design-vue/dist/antd.css';
@@ -25,5 +25,8 @@ export default defineRuntimeConfig({
     },
     onAppCreated: ({ app }) => {
         app.use(Button);
+        app.use(InputNumber);
+        app.use(Input);
+        app.use(Popover);
     },
 });
