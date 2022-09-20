@@ -19,8 +19,8 @@ export default {
             },
             {
                 name: 'img',
-                title: '图片组件',
-                children: [{ name: 'getMajor' }, { name: 'cwebpBin' }, { name: 'potrace' }],
+                title: '图片功能区',
+                children: [{ name: 'imgBeauty' }],
             },
         ],
     },

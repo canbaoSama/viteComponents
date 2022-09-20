@@ -1,3 +1,5 @@
+@import url('./styles/ant.less');
+
 body, html {
     margin: 0;
     overflow: hidden;
@@ -10,3 +12,91 @@ body, html {
 .fes-layout-main {
     padding: 24px;
 }
+
+/** 滚动条 */
+.phone-scrollbar {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.phone-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+}
+.phone-scrollbar::-webkit-scrollbar-thumb:vertical {
+    border-right: 4px solid rgba(255, 255, 255, 0);
+    height: 50px;
+    background-color: rgba(144, 147, 153, 0.5);
+    background-clip: content-box;
+    border-radius: 2px;
+}
+.phone-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    border-bottom: 4px solid rgba(255, 255, 255, 0);
+    width: 50px;
+    background-color: rgba(144, 147, 153, 0.5);
+    ;
+    background-clip: content-box;
+    border-radius: 2px;
+}
+.phone-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.phone-scrollbar::-webkit-scrollbar-button:end:increment,
+.phone-scrollbar::-webkit-scrollbar-button:start:decrement {
+    display: block;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+}
+
+// 自定义间距
+each(range(5, 50, 5), {
+        .pb-@{value} {
+            padding-bottom: (@value * 1px);
+        }
+
+        .pt-@{value} {
+            padding-top: (@value * 1px);
+        }
+
+        .pl-@{value} {
+            padding-left: (@value * 1px);
+        }
+
+        .pr-@{value} {
+            padding-right: (@value * 1px);
+        }
+
+        .plr-@{value} {
+            padding: 0 (@value * 1px);
+        }
+
+        .ptb-@{value} {
+            padding: (@value * 1px) 0;
+        }
+
+        .mb-@{value} {
+            margin-bottom: (@value * 1px);
+        }
+
+        .mt-@{value} {
+            margin-top: (@value * 1px);
+        }
+
+        .ml-@{value} {
+            margin-left: (@value * 1px);
+        }
+
+        .mr-@{value} {
+            margin-right: (@value * 1px);
+        }
+
+        .mlr-@{value} {
+            margin: 0 (@value * 1px);
+        }
+
+        .mtb-@{value} {
+            margin: (@value * 1px) 0;
+        }
+    }
+);

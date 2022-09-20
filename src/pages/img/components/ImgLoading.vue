@@ -28,6 +28,42 @@ const imgList = [
         pre: '/src/images/webp/3.webp',
         next: '/src/images/3.jpg',
     },
+    {
+        pre: '/src/images/icon.png',
+        next: '/src/images/icon.png',
+    },
+    // {
+    //     pre: '/src/images/svg/1.svg',
+    //     next: '/src/images/1.png',
+    // },
+    // {
+    //     pre: '/src/images/webp/3.webp',
+    //     next: '/src/images/3.jpg',
+    // },
+    // {
+    //     pre: '/src/images/icon.png',
+    //     next: '/src/images/icon.png',
+    // },
+    // {
+    //     pre: '/src/images/icon.png',
+    //     next: '/src/images/icon.png',
+    // },
+    // {
+    //     pre: '/src/images/webp/2.webp',
+    //     next: '/src/images/2.png',
+    // },
+    // {
+    //     pre: '/src/images/webp/3.webp',
+    //     next: '/src/images/3.jpg',
+    // },
+    // {
+    //     pre: '/src/images/webp/3.webp',
+    //     next: '/src/images/3.jpg',
+    // },
+    // {
+    //     pre: '/src/images/icon.png',
+    //     next: '/src/images/icon.png',
+    // },
 ];
 
 const loaded = ref(false);
@@ -52,7 +88,7 @@ const transitionend = () => {
         height: 250px;
         img {
             position: absolute;
-            width: 100%;
+            max-width: 100%;
             height: auto;
         }
         .pre {
