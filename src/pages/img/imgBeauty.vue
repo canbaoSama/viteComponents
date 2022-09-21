@@ -21,17 +21,22 @@
                 <template #tab><AppstoreAddOutlined />图片布局</template>
                 <ImgLayout />
             </a-tab-pane>
+            <a-tab-pane key="canny">
+                <template #tab><ColumnHeightOutlined />图片置灰</template>
+                <Canny />
+            </a-tab-pane>
         </a-tabs>
     </div>
 </template>
 <script setup>
 import { defineRouteMeta } from '@fesjs/fes';
 import { ref } from 'vue';
-import { BgColorsOutlined, RetweetOutlined, DownloadOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue';
+import { BgColorsOutlined, RetweetOutlined, DownloadOutlined, AppstoreAddOutlined, ColumnHeightOutlined } from '@ant-design/icons-vue';
 import PotraceSvg from './components/PotraceSvg.vue';
 import ImgLoding from './components/ImgLoading.vue';
 import getMajorColor from './components/GetMajorColor.vue';
 import ImgLayout from './components/ImgLayout.vue';
+import Canny from './components/Canny.vue';
 
 defineRouteMeta({
     name: 'imgBeauty',
