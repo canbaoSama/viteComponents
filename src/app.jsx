@@ -1,5 +1,5 @@
 import { access, defineRuntimeConfig } from '@fesjs/fes';
-import { Button, InputNumber, Input, Popover, Tabs, Upload } from 'ant-design-vue';
+import { Button, InputNumber, Input, Popover, Tabs, Upload, Radio, RadioButton, RadioGroup } from 'ant-design-vue';
 import PageLoading from '@/components/PageLoading.vue';
 import UserCenter from '@/components/UserCenter.vue';
 import 'ant-design-vue/dist/antd.css';
@@ -31,5 +31,8 @@ export default defineRuntimeConfig({
         app.use(Tabs);
         app.use(Upload);
         app.use(Popover);
+        app.use(Radio);
+        app.use(RadioButton);
+        app.use(RadioGroup);
     },
 });

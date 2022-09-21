@@ -5,12 +5,28 @@ body, html {
     overflow: hidden;
 }
 
-.img-page {
-    width: 100%;
-}
-
 .fes-layout-main {
     padding: 24px;
+    position: relative;
+    overflow: hidden;
+    .public-template {
+        width: 100%;
+        height: calc(100% - 65px);
+        overflow: auto;
+    }
+}
+.public-footer-fix {
+    position: absolute;
+    padding: 12px 24px;
+    text-align: right;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 48px);
+    margin: 0 24px;
+    border-top: 1px solid #d7d7d7;
+    button:not(:first-child) {
+        margin-left: 40px;
+    }
 }
 
 /** 滚动条 */
@@ -47,6 +63,53 @@ body, html {
     width: 0;
     height: 0;
     background-color: transparent;
+}
+
+/** 多列布局,个人默认4列 */
+.public-multi-column {
+    column-count: 4;
+    column-gap: 0;
+    .item {
+        padding: 2px;
+    }
+}
+/** 瀑布流布局，个人默认4列 */
+.public-waterfall {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(4, 1fr);
+    .item {
+        margin: 0;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        img {
+            grid-row: 1 / -1;
+            grid-column: 1;
+        }
+    }
+}
+.public-multi-column, .public-waterfall {
+    .item {
+        position: relative;
+        counter-increment: count;
+        &::after {
+            position: absolute;
+            display: block;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+            background-color: #000;
+            color: #fff;
+            content: counter(count);
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+    }
 }
 
 // 自定义间距

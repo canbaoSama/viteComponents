@@ -1,21 +1,25 @@
 <template>
-    <div class="img-page">
+    <div class="public-template">
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="getMajorColor">
-                <template #tab> <BgColorsOutlined />获取图片主颜色</template>
+                <template #tab><BgColorsOutlined />获取图片主颜色</template>
                 <div class="tab-container">
                     <getMajorColor />
                 </div>
             </a-tab-pane>
             <a-tab-pane key="imgLoading">
-                <template #tab> <RetweetOutlined />图片加载</template>
+                <template #tab><RetweetOutlined />图片加载</template>
                 <div class="tab-container">
                     <ImgLoding />
                 </div>
             </a-tab-pane>
             <a-tab-pane key="potraceSvg">
-                <template #tab> <DownloadOutlined />生成svg图片</template>
+                <template #tab><DownloadOutlined />生成svg图片</template>
                 <div class="tab-container"><PotraceSvg /></div>
+            </a-tab-pane>
+            <a-tab-pane key="multiColumn">
+                <template #tab><AppstoreAddOutlined />图片布局</template>
+                <ImgLayout />
             </a-tab-pane>
         </a-tabs>
     </div>
@@ -23,10 +27,11 @@
 <script setup>
 import { defineRouteMeta } from '@fesjs/fes';
 import { ref } from 'vue';
-import { BgColorsOutlined, RetweetOutlined, DownloadOutlined } from '@ant-design/icons-vue';
+import { BgColorsOutlined, RetweetOutlined, DownloadOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue';
 import PotraceSvg from './components/PotraceSvg.vue';
 import ImgLoding from './components/ImgLoading.vue';
 import getMajorColor from './components/GetMajorColor.vue';
+import ImgLayout from './components/ImgLayout.vue';
 
 defineRouteMeta({
     name: 'imgBeauty',

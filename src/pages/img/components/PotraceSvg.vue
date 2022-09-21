@@ -1,25 +1,23 @@
 <template>
-    <div class="img-page">
-        <UploadImgShow v-model="src" @emitImgLoaded="emitImgLoaded" />
-        <div class="operate-content">
-            <div class="operate-content-item">width: &nbsp;&nbsp;<a-input-number v-model:value="form.width" :min="0" :max="600" :precision="0" /></div>
-            <div class="operate-content-item">height: &nbsp;&nbsp;<a-input-number v-model:value="form.height" :min="0" :max="600" :precision="0" /></div>
-            <div class="operate-content-item">
-                <a-popover :title="颜色选择" trigger="click">
-                    <template #content>
-                        <ColorPicker @colorChange="colorChange" />
-                    </template>
-                    <div :style="{ backgroundColor: form.color }" class="color-show"></div>
-                </a-popover>
-                <a-input v-model:value="form.color" disabled :style="{ color: form.color }" />
-            </div>
+    <UploadImgShow v-model="src" @emitImgLoaded="emitImgLoaded" />
+    <div class="operate-content">
+        <div class="operate-content-item">width: &nbsp;&nbsp;<a-input-number v-model:value="form.width" :min="0" :max="600" :precision="0" /></div>
+        <div class="operate-content-item">height: &nbsp;&nbsp;<a-input-number v-model:value="form.height" :min="0" :max="600" :precision="0" /></div>
+        <div class="operate-content-item">
+            <a-popover :title="颜色选择" trigger="click">
+                <template #content>
+                    <ColorPicker @colorChange="colorChange" />
+                </template>
+                <div :style="{ backgroundColor: form.color }" class="color-show"></div>
+            </a-popover>
+            <a-input v-model:value="form.color" disabled :style="{ color: form.color }" />
         </div>
-        <div class="operate-btns">
-            <a-button type="success" @click="createSvg">生成svg图片</a-button>
-            <a-button type="warning" @click="ratioImg">保持图片比例</a-button>
-            <a-button type="primary"><a :href="svgHref" download>点击下载</a></a-button>
-        </div>
-        <div ref="imgRef" class="write-img"></div>
+    </div>
+    <div ref="imgRef" class="write-img"></div>
+    <div class="public-footer-fix">
+        <a-button type="success" @click="createSvg">生成svg图片</a-button>
+        <a-button type="warning" @click="ratioImg">保持图片比例</a-button>
+        <a-button type="primary"><a :href="svgHref" download>点击下载</a></a-button>
     </div>
 </template>
 <script setup>
@@ -106,14 +104,6 @@ const ratioImg = () => {
     svg {
         width: 100%;
         max-width: 100%;
-    }
-}
-.operate-btns {
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
-    .ant-btn:not(:first-child) {
-        margin-left: 40px;
     }
 }
 </style>
