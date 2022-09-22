@@ -4,7 +4,7 @@
         <div class="operate-content-item">width: &nbsp;&nbsp;<a-input-number v-model:value="form.width" :min="0" :max="600" :precision="0" /></div>
         <div class="operate-content-item">height: &nbsp;&nbsp;<a-input-number v-model:value="form.height" :min="0" :max="600" :precision="0" /></div>
         <div class="operate-content-item">
-            <a-popover :title="颜色选择" trigger="click">
+            <a-popover title="颜色选择" trigger="click">
                 <template #content>
                     <ColorPicker @colorChange="colorChange" />
                 </template>
