@@ -85,6 +85,7 @@ const ratioImg = () => {
 .operate-content {
     margin: 24px 12px;
     display: flex;
+    width: 100%;
     .operate-content-item {
         display: flex;
         align-items: center;
