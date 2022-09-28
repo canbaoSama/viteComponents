@@ -1,15 +1,20 @@
 <template>
     <UploadImgShow v-model="src" />
-    <div class="loading-img"><img ref="imgRef" :src="src" class="img-test" @load="imgLoaded" /></div>
-    <div :style="{ background: color }" class="show-color">
+    <div class="w-full"><img ref="imgRef" :src="src" class="w-0.25 h-0.25" @load="imgLoaded" /></div>
+    <div
+        :style="{ background: color }"
+        class="w-125 h-12.5 mt-6 flex items-center justify-center text-black text-lg font-bold border-solid border-black border-0.5"
+    >
         <span>{{ `图片主色: ${color}` }}</span>
         <a-button type="primary" class="ml-20" @click="copyText(color)">复制</a-button>
     </div>
 </template>
 <script setup>
 import { ref } from 'vue';
-import { copyText } from '@/common/utils';
+
 import UploadImgShow from './UploadImgShow.vue';
+
+import { copyText } from '@/common/utils';
 
 const imgRef = ref();
 const src = ref('src/images/3.jpg');
@@ -22,38 +27,3 @@ const imgLoaded = () => {
     color.value = `rgba(${data.join(',')})`;
 };
 </script>
-<style lang="less" scoped>
-.source-img {
-    max-width: 500px;
-}
-.loading-img {
-    width: 100%;
-    .img-test {
-        width: 1px;
-        height: 1px;
-    }
-}
-.show-color {
-    width: 500px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    font-size: 18px;
-    font-weight: bold;
-    border: 2px dashed #000;
-}
-.upload-img {
-    margin-top: 24px;
-    .upload-content {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-        .upload-title {
-            margin-top: 4px;
-        }
-    }
-}
-</style>

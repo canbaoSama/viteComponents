@@ -1,7 +1,12 @@
 import { access, defineRuntimeConfig } from '@fesjs/fes';
 import { Button, InputNumber, Input, Popover, Tabs, Upload, Radio, RadioButton, RadioGroup } from 'ant-design-vue';
+import Prism from 'prismjs';
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress';
+import VMdEditor from '@kangc/v-md-editor';
+
 import PageLoading from '@/components/PageLoading.vue';
 import UserCenter from '@/components/UserCenter.vue';
+
 import 'ant-design-vue/dist/antd.css';
 
 export default defineRuntimeConfig({
@@ -34,5 +39,8 @@ export default defineRuntimeConfig({
         app.use(Radio);
         app.use(RadioButton);
         app.use(RadioGroup);
+
+        VMdEditor.use(vuepressTheme, { Prism });
+        app.use(VMdEditor);
     },
 });

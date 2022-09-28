@@ -34,6 +34,7 @@
 import { defineRouteMeta } from '@fesjs/fes';
 import { ref } from 'vue';
 import { BgColorsOutlined, RetweetOutlined, DownloadOutlined, AppstoreAddOutlined } from '@ant-design/icons-vue';
+
 import PotraceSvg from './components/PotraceSvg.vue';
 import ImgLoding from './components/ImgLoading.vue';
 import getMajorColor from './components/GetMajorColor.vue';

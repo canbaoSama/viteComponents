@@ -1,18 +1,18 @@
 <template>
-    <div class="upload-img-show">
-        <img :src="modelValue || 'src/images/3.jpg'" class="source-img" @load="imgLoaded" />
+    <div class="flex justify-center w-full items-end">
+        <img :src="modelValue || 'src/images/3.jpg'" class="max-w-125 mr-12" @load="imgLoaded" />
         <a-upload
             :show-upload-list="false"
             accept=".jpg,.jpeg,.png,.git,.svg"
             :multiline="false"
             list-type="picture-card"
-            class="upload-img"
+            class="flex items-center flex-wrap justify-center"
             :beforeUpload="beforeUpload"
         >
             <div class="upload-content">
                 <LoadingOutlined v-if="isUploding" style="font-size: 40px; color: #1890ff" />
                 <CloudUploadOutlined v-else style="font-size: 40px; color: #1890ff" />
-                <div class="upload-title">上传图片预览</div>
+                <div class="mt-1">上传图片预览</div>
             </div>
         </a-upload>
     </div>
@@ -40,24 +40,3 @@ const imgLoaded = (e) => {
     emits('emitImgLoaded', { width: e.currentTarget.width, height: e.currentTarget.height });
 };
 </script>
-<style lang="less" scoped>
-.upload-img-show {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: flex-end;
-    .source-img {
-        max-width: 500px;
-        margin-right: 50px;
-    }
-    .upload-content {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center;
-        .upload-title {
-            margin-top: 4px;
-        }
-    }
-}
-</style>

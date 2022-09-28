@@ -1,5 +1,5 @@
 <template>
-    <div class="operator-btns">
+    <div class="mb-6 text-center">
         <a-radio-group v-model:value="radioValue" size="large" button-style="solid">
             <a-radio-button value="multiColumn">多列布局</a-radio-button>
             <a-radio-button value="waterfall">瀑布布局</a-radio-button>
@@ -38,9 +38,3 @@ const imgList = [
     'https://img0.baidu.com/it/u=3133536309,760067492&fm=253&fmt=auto?w=92&h=69',
 ];
 </script>
-<style lang="less" scoped>
-.operator-btns {
-    margin-bottom: 24px;
-    text-align: center;
-}
-</style>

@@ -56,6 +56,8 @@
         "@fesjs/plugin-enums": "^3.0.0-beta.6",
         "@fesjs/plugin-layout": "^5.0.0-beta.13",
         "@fesjs/plugin-model": "^3.0.0-beta.5",
+        "@fesjs/plugin-windicss": "3.0.0-beta.6",
+        "@kangc/v-md-editor": "^2.3.15",
         "ant-design-vue": "^3.2.12",
         "canny-edge-detector": "^1.0.0",
         "core-js": "^3.25.0",
@@ -63,6 +65,7 @@
         "image-js": "^0.35.1",
         "lodash-es": "^4.17.21",
         "potrace": "^2.1.8",
+        "prismjs": "^1.29.0",
         "svgo": "^2.8.0",
         "vue": "^3.2.38",
         "vue-accessible-color-picker": "^4.0.6"

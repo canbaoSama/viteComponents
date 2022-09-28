@@ -26,6 +26,7 @@ import Potrace from 'potrace';
 import { ref } from 'vue';
 import { ColorPicker } from 'vue-accessible-color-picker';
 import { debounce } from 'lodash-es';
+
 import UploadImgShow from './UploadImgShow.vue';
 
 defineRouteMeta({
