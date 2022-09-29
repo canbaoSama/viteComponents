@@ -3,6 +3,7 @@ import { Button, InputNumber, Input, Popover, Tabs, Upload, Radio, RadioButton, 
 import Prism from 'prismjs';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress';
 import VMdEditor from '@kangc/v-md-editor';
+import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji/index';
 
 import PageLoading from '@/components/PageLoading.vue';
 import UserCenter from '@/components/UserCenter.vue';
@@ -41,6 +42,8 @@ export default defineRuntimeConfig({
         app.use(RadioGroup);
 
         VMdEditor.use(vuepressTheme, { Prism });
+        VMdEditor.use(createEmojiPlugin());
+
         app.use(VMdEditor);
     },
 });
