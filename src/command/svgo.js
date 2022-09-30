@@ -1,5 +1,6 @@
 const { extname, basename } = require('path');
 const { statSync, readFileSync, writeFileSync, readdirSync } = require('fs');
+
 const { optimize } = require('svgo');
 
 const presetDefault = [
@@ -36,5 +37,4 @@ function optimizeSvg(files) {
     return Promise.all(optimizedSvgData);
 }
 
-console.log(readdirSync(dirPath).map((item) => `${dirPath}/${item}`));
 optimizeSvg(readdirSync(dirPath).map((item) => `${dirPath}/${item}`));
