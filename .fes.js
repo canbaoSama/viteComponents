@@ -26,6 +26,10 @@ export default {
                 name: 'vmdeditor',
                 title: 'md 编辑',
             },
+            {
+                name: 'xlsx',
+                title: 'xlsx 功能',
+            },
         ],
     },
     enums: {
