@@ -1,30 +1,30 @@
 <template>
-    <div class="flex items-center h-32">
-        <a-upload
-            :show-upload-list="false"
-            accept=".xlsx, .xls"
-            :multiline="false"
-            list-type="picture-card"
-            class="flex items-center flex-wrap justify-center"
-            :beforeUpload="beforeUpload"
-        >
-            <div class="upload-content">
-                <LoadingOutlined v-if="isUploding" style="font-size: 40px; color: #1890ff" />
-                <CloudUploadOutlined v-else style="font-size: 40px; color: #1890ff" />
-                <div class="mt-1">导入文件</div>
-            </div>
-        </a-upload>
-        <a-button class="mt-5" type="primary" @click="createBook">生成EXCEL</a-button>
-    </div>
-    <div class="overflow-auto w-full h-[calc(100%-8rem)] pr-4 pb-4">
-        <CommonTable :dataSource="dataSource" class="min-w-300" />
-    </div>
+    <a-spin :spinning="spinning" tip="文件读取中..." size="large">
+        <div class="flex items-center h-32">
+            <a-upload
+                :show-upload-list="false"
+                accept=".xlsx, .xls"
+                :multiline="false"
+                list-type="picture-card"
+                class="flex items-center flex-wrap justify-center"
+                :beforeUpload="beforeUpload"
+            >
+                <div class="upload-content">
+                    <CloudUploadOutlined style="font-size: 40px; color: #1890ff" />
+                    <div class="mt-1">导入文件</div>
+                </div>
+            </a-upload>
+        </div>
+        <div class="overflow-auto w-full h-[calc(100%-8rem)] pr-4 pb-4">
+            <CommonTable :dataSource="dataSource" class="min-w-300" />
+        </div>
+    </a-spin>
 </template>
 <script setup>
 import * as XLSX from 'xlsx/xlsx.js';
 import { defineRouteMeta } from '@fesjs/fes';
 import { ref } from 'vue';
-import { CloudUploadOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+import { CloudUploadOutlined } from '@ant-design/icons-vue';
 
 import CommonTable from './components/CommonTable.vue';
 
@@ -33,7 +33,7 @@ defineRouteMeta({
     title: 'xlsx 功能',
 });
 
-const isUploding = ref(false);
+const spinning = ref(false);
 
 const excelJsonData = ref([]);
 const dataSource = ref([]);
@@ -112,44 +112,44 @@ const parsingTable = (table) => {
     console.log(dataSource.value);
 };
 
-const downFile = (blobData) => {
-    if (typeof window.navigator.msSaveBlob !== 'undefined') {
-        window.navigator.msSaveBlob(new Blob([blobData]), `${new Date().getTime()}.xlsx`);
-    } else {
-        const url = window.URL.createObjectURL(new Blob([blobData]));
-        const link = document.createElement('a');
-        link.style.display = 'none';
-        link.href = url;
-        link.setAttribute('download', `${new Date().getTime()}.xlsx`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-    }
-};
-const createBook = () => {
-    //使用table_to_sheet或table_to_book其中一种方法
+// const downFile = (blobData) => {
+//     if (typeof window.navigator.msSaveBlob !== 'undefined') {
+//         window.navigator.msSaveBlob(new Blob([blobData]), `${new Date().getTime()}.xlsx`);
+//     } else {
+//         const url = window.URL.createObjectURL(new Blob([blobData]));
+//         const link = document.createElement('a');
+//         link.style.display = 'none';
+//         link.href = url;
+//         link.setAttribute('download', `${new Date().getTime()}.xlsx`);
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+//         window.URL.revokeObjectURL(url);
+//     }
+// };
+// const createBook = () => {
+//     //使用table_to_sheet或table_to_book其中一种方法
 
-    //table_to_sheet的用法
-    const worksheet = XLSX.utils.table_to_sheet(document.getElementById('tableView'));
-    const workbook = {
-        SheetNames: [],
-        Sheets: {},
-    };
-    workbook.SheetNames.push('sheet1');
-    worksheet['!cols'] = [{ wch: 20 }]; //设置第一列的列宽
-    workbook.Sheets.sheet1 = worksheet;
+//     //table_to_sheet的用法
+//     const worksheet = XLSX.utils.table_to_sheet(document.getElementById('tableView'));
+//     const workbook = {
+//         SheetNames: [],
+//         Sheets: {},
+//     };
+//     workbook.SheetNames.push('sheet1');
+//     worksheet['!cols'] = [{ wch: 20 }]; //设置第一列的列宽
+//     workbook.Sheets.sheet1 = worksheet;
 
-    //table_to_book的用法
-    // let workbook = XLSX.utils.table_to_book(document.getElementById('tableView'));
+//     //table_to_book的用法
+//     // let workbook = XLSX.utils.table_to_book(document.getElementById('tableView'));
 
-    const data = XLSX.write(workbook, {
-        bookType: 'xlsx', // 要生成的文件类型
-        type: 'array',
-    });
-    const blobData = new Blob([data], { type: 'application/octet-stream' });
-    downFile(blobData);
-};
+//     const data = XLSX.write(workbook, {
+//         bookType: 'xlsx', // 要生成的文件类型
+//         type: 'array',
+//     });
+//     const blobData = new Blob([data], { type: 'application/octet-stream' });
+//     downFile(blobData);
+// };
 
 const readFile = async (file) =>
     new Promise((resolve) => {
@@ -160,10 +160,20 @@ const readFile = async (file) =>
         reader.readAsBinaryString(file); //以二进制的方式读取
     });
 const beforeUpload = async (file) => {
+    spinning.value = true;
     const data = await readFile(file);
     const workbook = XLSX.read(data, { type: 'binary' });
     const worksheet = workbook.Sheets[workbook.SheetNames[0]]; //获取第一个Sheet
     excelJsonData.value = XLSX.utils.sheet_to_json(worksheet); //json数据格式
-    parsingTable(worksheet);
+    try {
+        parsingTable(worksheet);
+    } finally {
+        spinning.value = false;
+    }
 };
 </script>
+<style lang="less" scoped>
+.ant-spin-nested-loading {
+    height: 100%;
+}
+</style>

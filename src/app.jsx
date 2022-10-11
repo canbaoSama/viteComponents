@@ -1,5 +1,5 @@
 import { access, defineRuntimeConfig } from '@fesjs/fes';
-import { Button, InputNumber, Input, Popover, Tabs, Upload, Radio, RadioButton, RadioGroup } from 'ant-design-vue';
+import { Button, InputNumber, Input, Popover, Tabs, Upload, Radio, RadioButton, RadioGroup, Spin } from 'ant-design-vue';
 import Prism from 'prismjs';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress';
 import VMdEditor from '@kangc/v-md-editor';
@@ -40,6 +40,7 @@ export default defineRuntimeConfig({
         app.use(Radio);
         app.use(RadioButton);
         app.use(RadioGroup);
+        app.use(Spin);
 
         VMdEditor.use(vuepressTheme, { Prism });
         VMdEditor.use(createEmojiPlugin());
