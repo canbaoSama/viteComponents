@@ -44,21 +44,19 @@
     "publishConfig": {
         "access": "public"
     },
-    "devDependencies": {
-        "@webank/eslint-config-webank": "^1.2.3"
-    },
     "dependencies": {
         "@ant-design-vue/use": "0.0.1-alpha.10",
         "@ant-design/icons-vue": "^6.1.0",
-        "@fesjs/builder-vite": "^3.0.0-beta.13",
+        "@fesjs/builder-vite": "3.0.0-beta.1",
         "@fesjs/fes": "^3.0.0-beta.6",
         "@fesjs/fes-design": "^0.7.0",
-        "@fesjs/plugin-access": "^3.0.0-beta.6",
+        "@fesjs/plugin-access": "3.0.0-beta.6",
         "@fesjs/plugin-enums": "^3.0.0-beta.6",
         "@fesjs/plugin-layout": "^5.0.0-beta.13",
         "@fesjs/plugin-model": "^3.0.0-beta.5",
         "@fesjs/plugin-windicss": "3.0.0-beta.6",
         "@kangc/v-md-editor": "^2.3.15",
+        "@webank/eslint-config-webank": "^1.2.3",
         "ant-design-vue": "^3.2.12",
         "canny-edge-detector": "^1.0.0",
         "core-js": "^3.25.0",

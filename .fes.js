@@ -4,7 +4,7 @@ export default {
     publicPath: './',
     access: {
         roles: {
-            admin: ['*'],
+            admin: ['*', '/'],
             manager: ['/'],
         },
     },
