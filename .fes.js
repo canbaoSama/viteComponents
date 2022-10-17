@@ -30,6 +30,10 @@ export default {
                 name: 'xlsx',
                 title: 'xlsx 功能',
             },
+            {
+                name: 'webgl',
+                title: 'webgl 功能',
+            },
         ],
     },
     enums: {
