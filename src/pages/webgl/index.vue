@@ -6,8 +6,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.124/examples/jsm/controls/OrbitControls.js';
-
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { defineRouteMeta } from '@fesjs/fes';
 
 import { WEBGL } from '@/common/WebGL';
@@ -56,7 +55,6 @@ onMounted(() => {
     const ambient = new THREE.AmbientLight(0x444444); //环境光
     scene.add(ambient);
 
-    const T0 = new Date(); // 上次时间
     const animate = () => {
         // let T1 = new Date(); // 本次时间
         // let t = T1 - T0;
@@ -70,7 +68,10 @@ onMounted(() => {
             document.body.appendChild(WEBGL.getWebGL2ErrorMessage());
         } else {
             animate();
-            new OrbitControls(camera, renderer.domElement);
+            // const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            // controls.update();
+            const contorls = new OrbitControls(camera, renderer.domElement);
+            console.log(contorls);
             // controls.addEventListener('change', animate)
         }
     } else {
