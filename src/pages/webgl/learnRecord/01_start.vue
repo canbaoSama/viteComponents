@@ -26,6 +26,10 @@ onMounted(() => {
     mesh.position.set(0, 50, 0); // 和之前的xyz模型的对比是y z x
     scene.add(mesh);
 
+    // 建立坐标轴
+    const axisHelper = new THREE.AxesHelper(250);
+    scene.add(axisHelper);
+
     // 点光源
     const point = new THREE.PointLight(0xffffff);
     point.position.set(200, 200, 100); //点光源位置
