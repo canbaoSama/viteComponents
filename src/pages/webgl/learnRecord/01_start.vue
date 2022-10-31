@@ -23,7 +23,7 @@ onMounted(() => {
     const geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
     const material = new THREE.MeshLambertMaterial({ color: 0x0000ff }); //材质对象Material
     const mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-    mesh.position.set(0, 50, 0);
+    mesh.position.set(0, 50, 0); // 和之前的xyz模型的对比是y z x
     scene.add(mesh);
 
     // 点光源
