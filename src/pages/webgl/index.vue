@@ -20,7 +20,7 @@ const canvas = ref(null);
 onMounted(() => {
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ canvas: canvas.value, context: canvas.value.getContext('webgl2') });
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(60, canvas.value.clientWidth / canvas.value.clientHeight, 0.1, 1000);
     camera.position.set(200, 200, 200); //设置相机位置
     camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
 
