@@ -59,6 +59,6 @@ onMounted(() => {
     };
 
     //执行渲染操作  指定场景、相机作为参数
-    renderWebgl(camera, renderer, canvas, animate);
+    renderWebgl(scene, camera, renderer, canvas, animate);
 });
 </script>
