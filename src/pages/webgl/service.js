@@ -9,7 +9,7 @@ export const renderWebgl = (camera, renderer, canvas, animate) => {
         if (WEBGL.isWebGL2Available() === false) {
             document.body.appendChild(WEBGL.getWebGL2ErrorMessage());
         } else {
-            animate();
+            animate?.();
             const contorls = new OrbitControls(camera, renderer.domElement);
             console.log(contorls);
         }

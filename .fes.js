@@ -36,6 +36,7 @@ export default {
                 children: [
                     { name: 'webgl', title: 'webgl 功能' },
                     { name: '01_start', title: 'webgl 开始' },
+                    { name: '02_drawLine', title: 'webgl 画线' },
                 ],
             },
         ],
