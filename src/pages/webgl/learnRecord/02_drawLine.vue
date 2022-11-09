@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import { renderWebgl } from '../service';
+import { createWebgl } from '../service';
 
 defineRouteMeta({
     name: '02_drawLine',
@@ -18,39 +18,40 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const scene = new THREE.Scene();
+    const { scene, render } = createWebgl(canvas.value);
 
-    // 相机设置
-    const width = canvas.value.clientWidth; //canvas宽度
-    const height = canvas.value.clientHeight; //canvas高度
-    const k = width / height; //窗口宽高比
-    const s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
-    const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000); //创建相机对象
-    camera.position.set(200, 300, 200); //设置相机位置
-    camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
+    const material_line = new THREE.LineBasicMaterial({ color: 0x0000ff });
 
-    // 建立坐标轴
-    const axisHelper = new THREE.AxesHelper(200);
-    scene.add(axisHelper);
-
-    const material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-
+    // 第一条线，三角形，加粗点
     const points = [];
-    points.push(new THREE.Vector3(-100, 0, 0));
-    points.push(new THREE.Vector3(0, 100, 0));
+    points.push(new THREE.Vector3(100, 0, 0));
+    points.push(new THREE.Vector3(0, 150, 0));
+    points.push(new THREE.Vector3(0, 0, 100));
     points.push(new THREE.Vector3(100, 0, 0));
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
-    const line = new THREE.Line(geometry, material);
+    const points_2 = [];
+    points_2.push(new THREE.Vector3(0, 0, 0));
+    points_2.push(new THREE.Vector3(150, 0, 150));
+    const geometry_2 = new THREE.BufferGeometry().setFromPoints(points_2);
+
+    const material_point = new THREE.PointsMaterial({ color: 0xff0000, size: 15.0 });
+    const point = new THREE.Points(geometry, material_point);
+    scene.add(point);
+
+    // 第二条线
+    const line = new THREE.Line(geometry, material_line);
+    const line_2 = new THREE.Line(geometry_2, material_line);
     scene.add(line);
+    scene.add(line_2);
 
-    // 创建渲染器对象
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas.value, context: canvas.value.getContext('webgl2') });
-    renderer.setSize(width, height); //设置渲染区域尺寸
-    renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
+    const texture = new THREE.TextureLoader().load('src/images/1.png');
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(4, 4);
+    scene.add(texture);
 
-    //执行渲染操作  指定场景、相机作为参数
-    renderWebgl(scene, camera, renderer, canvas);
+    render(scene);
 });
 </script>
