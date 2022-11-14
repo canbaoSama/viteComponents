@@ -18,7 +18,7 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const { scene, render } = createWebgl(canvas.value);
+    const { scene, render } = createWebgl(canvas.value, { axisRender: true });
 
     const material_line = new THREE.LineBasicMaterial({ color: 0x0000ff });
 

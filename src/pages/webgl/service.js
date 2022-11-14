@@ -21,21 +21,33 @@ export const renderWebgl = (scene, camera, renderer, canvas, animate) => {
 };
 
 // 基础的 webgl 创建
-export const createWebgl = (canvas) => {
+export const createWebgl = (canvas, options) => {
     const scene = new THREE.Scene();
+
+    const {
+        axisRender = true, // 是否显示坐标轴
+        threeD = false, // 是否3d渲染
+    } = options;
 
     // 相机设置
     const width = canvas.clientWidth; //canvas宽度
     const height = canvas.clientHeight; //canvas高度
     const k = width / height; //窗口宽高比
-    const s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
-    const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000); //创建相机对象
-    camera.position.set(200, 300, 200); //设置相机位置
+    let camera;
+    if (threeD) {
+        camera = new THREE.PerspectiveCamera(60, k, 0.1, 1000); //透视相机
+    } else {
+        const s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
+        camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000); //创建相机对象
+    }
+    camera.position.set(300, 0, 100); //设置相机位置
     camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
 
     // 建立坐标轴
-    const axisHelper = new THREE.AxesHelper(300);
-    scene.add(axisHelper);
+    if (axisRender) {
+        const axisHelper = new THREE.AxesHelper(300);
+        scene.add(axisHelper);
+    }
 
     // 创建渲染器对象
     const renderer = new THREE.WebGLRenderer({ canvas, context: canvas.getContext('webgl2') });
