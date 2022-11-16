@@ -4,7 +4,12 @@ import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'; //导入RGB�
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; //导入控制器模块，轨道控制器
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; //导入GLTF模块，模型解析器,根据文件格式来定
 
+import { WEBGL } from '@/common/WebGL';
+
 class Base3d {
+    default_bg = 0xb9d3ff;
+    basePath = 'http://127.0.0.1:5500/public/files/gltf/';
+
     constructor(canvas) {
         this.container = canvas;
         this.camera = {};
@@ -12,7 +17,7 @@ class Base3d {
         this.renderer = {};
         this.controls = {};
         this.init();
-        this.animate();
+        //this.animate();
     }
     init() {
         //初始化场景
@@ -23,30 +28,25 @@ class Base3d {
         this.initRender();
         //初始化控制器，控制摄像头,控制器一定要在渲染器后
         this.initControls();
-        // 添加物体模型
-        this.addMesh();
         //监听场景大小改变，跳转渲染尺寸
-        window.addEventListener('resize', this.onWindowResize.bind(this));
+        //window.addEventListener('resize', this.onWindowResize.bind(this));
     }
     initScene() {
         this.scene = new THREE.Scene();
-        this.setEnvMap('079');
+        //this.setEnvMap('079');
     }
     initCamera() {
-        this.camera = new THREE.PerspectiveCamera(45, this.canvas.clientWidth / this.canvas.clientHeight, 0.25, 200);
+        this.camera = new THREE.PerspectiveCamera(60, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
         this.camera.position.set(300, 0, 100);
     }
     initRender() {
-        this.renderer = new THREE.WebGLRenderer({ antialias: true }); //设置抗锯齿
-        //设置屏幕像素比
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        //渲染的尺寸大小
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        //色调映射
-        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        //曝光
-        this.renderer.toneMappingExposure = 3;
-        this.container.appendChild(this.renderer.domElement);
+        this.renderer = new THREE.WebGLRenderer({ canvas: this.container, antialias: true, context: this.container.getContext('webgl2') }); //设置抗锯齿
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight); //渲染的尺寸大小
+        this.renderer.setClearColor(this.default_bg, 1); //设置背景颜色
+    }
+    setAxisHelper() {
+        const axisHelper = new THREE.AxesHelper(300);
+        this.scene.add(axisHelper);
     }
     setEnvMap(hdr) {
         //设置环境背景
@@ -57,18 +57,24 @@ class Base3d {
         });
     }
     render() {
-        this.renderer.render(this.scene, this.camera);
-    }
-    animate() {
-        this.renderer.setAnimationLoop(this.render.bind(this));
+        if (WEBGL.isWebGLAvailable()) {
+            if (WEBGL.isWebGL2Available() === false) {
+                document.body.appendChild(WEBGL.getWebGL2ErrorMessage());
+            } else {
+                this.animate();
+            }
+        } else {
+            const warning = WEBGL.getWebGLErrorMessage();
+            this.container.appendChild(warning);
+        }
     }
     initControls() {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
     //加载模型
-    setModel(modelName) {
+    setModel(modelName, path) {
         return new Promise((resolve) => {
-            const loader = new GLTFLoader().setPath('files/gltf/');
+            const loader = new GLTFLoader().setPath(path ? `${this.basePath}/${path}/` : this.basePath);
             loader.load(modelName, (gltf) => {
                 console.log(gltf);
                 this.model = gltf.scene.children[0];

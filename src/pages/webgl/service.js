@@ -11,8 +11,6 @@ export const renderWebgl = (scene, camera, renderer, canvas, animate) => {
             document.body.appendChild(WEBGL.getWebGL2ErrorMessage());
         } else {
             animate ? animate() : renderer.render(scene, camera);
-            const contorls = new OrbitControls(camera, renderer.domElement);
-            console.log(contorls);
         }
     } else {
         const warning = WEBGL.getWebGLErrorMessage();
@@ -53,6 +51,9 @@ export const createWebgl = (canvas, options) => {
     const renderer = new THREE.WebGLRenderer({ canvas, context: canvas.getContext('webgl2') });
     renderer.setSize(width, height); //设置渲染区域尺寸
     renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
+
+    const contorls = new OrbitControls(camera, renderer.domElement);
+    console.log(contorls);
 
     const animate = () => {
         renderer.render(scene, camera);
