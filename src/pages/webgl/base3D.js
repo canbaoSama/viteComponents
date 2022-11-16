@@ -9,15 +9,13 @@ import { WEBGL } from '@/common/WebGL';
 class Base3d {
     default_bg = 0xb9d3ff;
     basePath = 'http://127.0.0.1:5500/public/files/gltf/';
-
+    camera;
+    scene;
+    renderer;
+    controls;
     constructor(canvas) {
         this.container = canvas;
-        this.camera = {};
-        this.scene = {};
-        this.renderer = {};
-        this.controls = {};
         this.init();
-        //this.animate();
     }
     init() {
         //初始化场景
@@ -29,7 +27,7 @@ class Base3d {
         //初始化控制器，控制摄像头,控制器一定要在渲染器后
         this.initControls();
         //监听场景大小改变，跳转渲染尺寸
-        //window.addEventListener('resize', this.onWindowResize.bind(this));
+        window.addEventListener('resize', this.onWindowResize.bind(this));
     }
     initScene() {
         this.scene = new THREE.Scene();
