@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import { createWebgl } from '../service';
+import base3D from '../base3D';
 
 defineRouteMeta({
     name: '02_drawLine',
@@ -18,7 +18,7 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const { scene, render } = createWebgl(canvas.value, { axisRender: true });
+    const threeD = new base3D(canvas.value);
 
     const material_line = new THREE.LineBasicMaterial({ color: 0x0000ff });
 
@@ -38,20 +38,27 @@ onMounted(() => {
 
     const material_point = new THREE.PointsMaterial({ color: 0xff0000, size: 15.0 });
     const point = new THREE.Points(geometry, material_point);
-    scene.add(point);
+    threeD.scene.add(point);
 
     // 第二条线
     const line = new THREE.Line(geometry, material_line);
     const line_2 = new THREE.Line(geometry_2, material_line);
-    scene.add(line);
-    scene.add(line_2);
+    threeD.scene.add(line);
+    threeD.scene.add(line_2);
 
     const texture = new THREE.TextureLoader().load('src/images/1.png');
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(4, 4);
-    scene.add(texture);
+    threeD.scene.add(texture);
 
-    render(scene);
+    threeD.setAxisHelper();
+
+    const animate = () => {
+        threeD.renderer.render(threeD.scene, threeD.camera);
+        requestAnimationFrame(animate); //请求再次执行渲染函数render
+    };
+
+    animate();
 });
 </script>

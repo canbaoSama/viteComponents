@@ -8,6 +8,7 @@ import { WEBGL } from '@/common/WebGL';
 
 class Base3d {
     default_bg = 0xb9d3ff;
+    default_point_color = 0xffffff;
     basePath = 'http://127.0.0.1:5500/public/files/gltf/';
     camera;
     scene;
@@ -35,7 +36,7 @@ class Base3d {
     }
     initCamera() {
         this.camera = new THREE.PerspectiveCamera(60, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
-        this.camera.position.set(300, 0, 100);
+        this.camera.position.set(300, 100, 100);
     }
     initRender() {
         this.renderer = new THREE.WebGLRenderer({ canvas: this.container, antialias: true, context: this.container.getContext('webgl2') }); //设置抗锯齿
@@ -45,6 +46,17 @@ class Base3d {
     setAxisHelper() {
         const axisHelper = new THREE.AxesHelper(300);
         this.scene.add(axisHelper);
+    }
+    setPointLight() {
+        // 点光源
+        const point = new THREE.PointLight(this.default_point_color);
+        point.position.set(200, 200, 100); //点光源位置
+        this.scene.add(point); //点光源添加到场景中
+    }
+    setAmbientLight() {
+        // 环境光
+        const ambient = new THREE.AmbientLight(0x444444);
+        this.scene.add(ambient);
     }
     setEnvMap(hdr) {
         //设置环境背景
@@ -59,7 +71,7 @@ class Base3d {
             if (WEBGL.isWebGL2Available() === false) {
                 document.body.appendChild(WEBGL.getWebGL2ErrorMessage());
             } else {
-                this.animate();
+                this.renderer.render(this.scene, this.camera);
             }
         } else {
             const warning = WEBGL.getWebGLErrorMessage();
@@ -69,26 +81,32 @@ class Base3d {
     initControls() {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
-    //加载模型
-    setModel(modelName, path) {
-        return new Promise((resolve) => {
-            const loader = new GLTFLoader().setPath(path ? `${this.basePath}/${path}/` : this.basePath);
-            loader.load(modelName, (gltf) => {
-                console.log(gltf);
-                this.model = gltf.scene.children[0];
-                this.scene.add(this.model);
-                resolve(`${this.modelName}模型添加成功`);
-            });
+    setGLTFLoader(modelName, path) {
+        // 加载 gltf 3D模型
+        return new Promise((resolve, reject) => {
+            const loader = new GLTFLoader().setPath(path ? `${this.basePath}${path}/` : this.basePath);
+            loader.load(
+                modelName,
+                (gltf) => {
+                    gltf.scene.children[0].scale.set(10, 10, 10);
+                    this.scene.add(gltf.scene.children[0]);
+                    resolve(`${this.modelName}模型添加成功`);
+                },
+                (xhr) => {
+                    console.log(`${(xhr.loaded / xhr.total) * 100}% loaded`);
+                },
+                (err) => {
+                    console.log(err);
+                    reject(err);
+                },
+            );
         });
-    }
-    addMesh() {
-        this.setModel('phone.glb');
     }
     onWindowResize() {
         //调整屏幕大小
-        this.camera.aspect = window.innerWidth / window.innerHeight; //摄像机宽高比例
+        this.camera.aspect = this.container.clientWidth / this.container.clientHeight; //摄像机宽高比例
         this.camera.updateProjectionMatrix(); //相机更新矩阵，将3d内容投射到2d面上转换
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }
 }
 export default Base3d;
