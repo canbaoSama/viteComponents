@@ -1,6 +1,4 @@
 import * as THREE from 'three'; //导入整个 three.js核心库
-import { EquirectangularReflectionMapping } from 'three'; //导入纹理映射模块
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'; //导入RGB加载器
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; //导入控制器模块，轨道控制器
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; //导入GLTF模块，模型解析器,根据文件格式来定
 
@@ -32,7 +30,6 @@ class Base3d {
     }
     initScene() {
         this.scene = new THREE.Scene();
-        //this.setEnvMap('079');
     }
     initCamera() {
         this.camera = new THREE.PerspectiveCamera(60, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
@@ -57,14 +54,6 @@ class Base3d {
         // 环境光
         const ambient = new THREE.AmbientLight(0x444444);
         this.scene.add(ambient);
-    }
-    setEnvMap(hdr) {
-        //设置环境背景
-        new RGBELoader().setPath('./files/hdr/').load(`${hdr}.hdr`, (texture) => {
-            texture.mapping = EquirectangularReflectionMapping; //圆柱形形纹理映射
-            this.scene.background = texture;
-            this.scene.environment = texture;
-        });
     }
     render() {
         if (WEBGL.isWebGLAvailable()) {

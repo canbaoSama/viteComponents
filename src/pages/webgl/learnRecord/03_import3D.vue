@@ -1,5 +1,5 @@
 <template>
-    <div class="webgl-02-drawLine public-absolute-full-container flex justify-center align-middle">
+    <div ref="containerRef" class="webgl-03-import3D public-absolute-full-container flex justify-center align-middle">
         <canvas ref="canvas" class="bg-black w-full h-full"></canvas>
     </div>
 </template>
@@ -20,6 +20,7 @@ defineRouteMeta({
 });
 
 const canvas = ref(null);
+const containerRef = ref(null);
 
 onMounted(async () => {
     const threeD = new base3D(canvas.value);
@@ -90,7 +91,7 @@ onMounted(async () => {
     );
 
     threeD.renderer.setPixelRatio(window.devicePixelRatio);
-    threeD.renderer.setSize(window.innerWidth, window.innerHeight);
+    //threeD.renderer.setSize(window.innerWidth, window.innerHeight);
     threeD.renderer.shadowMap.enabled = true;
 
     threeD.container.appendChild(stats.dom);
@@ -98,5 +99,7 @@ onMounted(async () => {
     threeD.controls.enablePan = false;
     threeD.controls.minDistance = 5;
     threeD.controls.maxDistance = 50;
+    stats.domElement.style.position = 'absolute'; //绝对坐标
+    containerRef.value.appendChild(stats.dom);
 });
 </script>
