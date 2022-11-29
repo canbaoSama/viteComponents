@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; //导入GLTF
 
 import { WEBGL } from '@/common/WebGL';
 
+// 公共的基础类，满足简单需求
 class Base3d {
     default_bg = 0xb9d3ff;
     default_point_color = 0xffffff;
@@ -70,16 +71,20 @@ class Base3d {
     initControls() {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
-    setGLTFLoader(modelName, path) {
+    setGLTFLoader(modelName, options) {
         // 加载 gltf 3D模型
+        const { path = '', controls } = options;
         return new Promise((resolve, reject) => {
             const loader = new GLTFLoader().setPath(path ? `${this.basePath}${path}/` : this.basePath);
             loader.load(
                 modelName,
                 (gltf) => {
-                    gltf.scene.children[0].scale.set(10, 10, 10);
-                    this.scene.add(gltf.scene.children[0]);
-                    resolve(`${this.modelName}模型添加成功`);
+                    if (controls) {
+                        resolve(gltf);
+                    } else {
+                        gltf.scene.children[0].scale.set(10, 10, 10);
+                        this.scene.add(gltf.scene);
+                    }
                 },
                 (xhr) => {
                     console.log(`${(xhr.loaded / xhr.total) * 100}% loaded`);
