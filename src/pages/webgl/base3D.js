@@ -39,7 +39,7 @@ class Base3d {
     initRender() {
         this.renderer = new THREE.WebGLRenderer({ canvas: this.container, antialias: true, context: this.container.getContext('webgl2') }); //设置抗锯齿
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight); //渲染的尺寸大小
-        this.renderer.setClearColor(this.default_bg, 1); //设置背景颜色
+        // this.renderer.setClearColor(this.default_bg, 1); //设置背景颜色
     }
     setAxisHelper() {
         const axisHelper = new THREE.AxesHelper(300);
@@ -55,6 +55,12 @@ class Base3d {
         // 环境光
         const ambient = new THREE.AmbientLight(0x444444);
         this.scene.add(ambient);
+    }
+    setDirectionalLight() {
+        // 平行光
+        const light = new THREE.DirectionalLight({ color: 0xffffff, intensity: 1 });
+        light.position.set(100, 100, 100);
+        this.scene.add(light);
     }
     render() {
         if (WEBGL.isWebGLAvailable()) {

@@ -38,6 +38,8 @@ export default {
                     { name: '01_start', title: 'webgl 开始' },
                     { name: '02_drawLine', title: 'webgl 画线' },
                     { name: '03_import3D', title: 'webgl 导入3D模型' },
+                    { name: '04_geometry', title: '几何体操作' },
+                    { name: '05_scenarios', title: '场景图' },
                 ],
             },
         ],
