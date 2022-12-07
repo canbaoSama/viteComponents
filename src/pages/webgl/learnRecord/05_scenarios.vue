@@ -7,7 +7,6 @@
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 import { GUI } from 'lil-gui';
-
 import * as THREE from 'three';
 
 import { Base3d, AxisGridHelper } from '../service';
