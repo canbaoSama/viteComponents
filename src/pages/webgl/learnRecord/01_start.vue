@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import base3D from '../base3D';
+import { Base3d } from '../service';
 
 defineRouteMeta({
     name: '01_start',
@@ -18,7 +18,7 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const threeD = new base3D(canvas.value);
+    const threeD = new Base3d(canvas.value);
     // 场景等基本网格模型
     const geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
     const material = new THREE.MeshLambertMaterial({ color: 0x0000ff }); //材质对象Material

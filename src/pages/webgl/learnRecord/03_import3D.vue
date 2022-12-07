@@ -11,7 +11,7 @@ import * as THREE from 'three'; //导入整个 three.js核心库
 
 import Stats from 'three/examples/jsm/libs/stats.module';
 
-import base3D from '../base3D';
+import { Base3d } from '../service';
 
 import { dottedCheckerBoard } from '../template/myGround';
 
@@ -24,7 +24,7 @@ const canvas = ref(null);
 const containerRef = ref(null);
 
 onMounted(async () => {
-    const threeD = new base3D(canvas.value);
+    const threeD = new Base3d(canvas.value);
     dottedCheckerBoard(threeD);
 
     let mixer;

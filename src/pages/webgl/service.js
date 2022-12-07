@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; //导入GLTF
 import { WEBGL } from '@/common/WebGL';
 
 // 公共的基础类，满足简单需求
-class Base3d {
+export class Base3d {
     default_bg = 0xb9d3ff;
     default_point_color = 0xffffff;
     basePath = 'http://127.0.0.1:5500/public/files/gltf/';
@@ -45,10 +45,10 @@ class Base3d {
         const axisHelper = new THREE.AxesHelper(300);
         this.scene.add(axisHelper);
     }
-    setPointLight() {
+    setPointLight(position = [200, 200, 100]) {
         // 点光源
         const point = new THREE.PointLight(this.default_point_color);
-        point.position.set(200, 200, 100); //点光源位置
+        point.position.set(...position); //点光源位置
         this.scene.add(point); //点光源添加到场景中
     }
     setAmbientLight() {
@@ -109,4 +109,28 @@ class Base3d {
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }
 }
-export default Base3d;
+export class AxisGridHelper {
+    constructor(node, units = 10) {
+        const axes = new THREE.AxesHelper();
+        axes.material.depthTest = false;
+        axes.renderOrder = 2; // after the grid
+        node.add(axes);
+
+        const grid = new THREE.GridHelper(units, units);
+        grid.material.depthTest = false;
+        grid.renderOrder = 1;
+        node.add(grid);
+
+        this.grid = grid;
+        this.axes = axes;
+        this.visible = false;
+    }
+    get visible() {
+        return this._visible;
+    }
+    set visible(v) {
+        this._visible = v;
+        this.grid.visible = v;
+        this.axes.visible = v;
+    }
+}

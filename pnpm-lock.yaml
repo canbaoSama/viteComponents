@@ -18,6 +18,7 @@ specifiers:
   core-js: ^3.25.0
   execa: ^6.1.0
   image-js: ^0.35.1
+  lil-gui: ^0.17.0
   lodash-es: ^4.17.21
   potrace: ^2.1.8
   prismjs: ^1.29.0
@@ -45,6 +46,7 @@ dependencies:
   core-js: 3.25.1
   execa: 6.1.0
   image-js: 0.35.1
+  lil-gui: 0.17.0
   lodash-es: 4.17.21
   potrace: 2.1.8
   prismjs: 1.29.0
@@ -5747,6 +5749,10 @@ packages:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+    dev: false
+
+  /lil-gui/0.17.0:
+    resolution: {integrity: sha512-MVBHmgY+uEbmJNApAaPbtvNh1RCAeMnKym82SBjtp5rODTYKWtM+MXHCifLe2H2Ti1HuBGBtK/5SyG4ShQ3pUQ==}
     dev: false
 
   /linkify-it/2.2.0:

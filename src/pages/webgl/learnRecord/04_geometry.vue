@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import base3D from '../base3D';
+import { Base3d } from '../service';
 
 defineRouteMeta({
     name: '04_geometry',
@@ -18,7 +18,7 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const threeD = new base3D(canvas.value);
+    const threeD = new Base3d(canvas.value);
     const geometry = new THREE.OctahedronGeometry(70);
 
     const makeInstance = (color, y) => {

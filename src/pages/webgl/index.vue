@@ -7,7 +7,7 @@
 import { ref, onMounted } from 'vue';
 import { defineRouteMeta } from '@fesjs/fes';
 
-import base3D from './base3D';
+import { Base3d } from './service';
 import { dottedCheckerBoard } from './template/myGround';
 
 defineRouteMeta({
@@ -17,7 +17,7 @@ defineRouteMeta({
 
 const canvas = ref(null);
 onMounted(() => {
-    const threeD = new base3D(canvas.value);
+    const threeD = new Base3d(canvas.value);
     dottedCheckerBoard(threeD);
 
     const animate = () => {

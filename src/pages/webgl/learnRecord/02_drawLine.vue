@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import base3D from '../base3D';
+import { Base3d } from '../service';
 
 defineRouteMeta({
     name: '02_drawLine',
@@ -18,7 +18,7 @@ defineRouteMeta({
 const canvas = ref(null);
 
 onMounted(() => {
-    const threeD = new base3D(canvas.value);
+    const threeD = new Base3d(canvas.value);
 
     const material_line = new THREE.LineBasicMaterial({ color: 0x0000ff });
 
