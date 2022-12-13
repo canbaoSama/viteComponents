@@ -41,8 +41,8 @@ onMounted(() => {
     loadManager.onLoad = () => {
         const mesh = new THREE.Mesh(geometry, materials);
         const mesh_2 = new THREE.Mesh(geometry_2, material_2);
-        //mesh_2.position.set(200, 0, 0);
-        //threeD.scene.add(mesh);
+        mesh_2.position.set(200, 0, 0);
+        threeD.scene.add(mesh);
         threeD.scene.add(mesh_2);
         animate(threeD);
     };
