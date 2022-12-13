@@ -40,6 +40,7 @@ export default {
                     { name: '03_import3D', title: 'webgl 导入3D模型' },
                     { name: '04_geometry', title: '几何体操作' },
                     { name: '05_scenarios', title: '场景图' },
+                    { name: '06_texture', title: '纹理贴图' },
                 ],
             },
         ],

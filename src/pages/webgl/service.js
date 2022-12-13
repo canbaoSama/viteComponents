@@ -134,3 +134,11 @@ export class AxisGridHelper {
         this.axes.visible = v;
     }
 }
+
+export function animate(threeD) {
+    const animateFunc = () => {
+        threeD.renderer.render(threeD.scene, threeD.camera);
+        requestAnimationFrame(animateFunc);
+    };
+    animateFunc();
+}

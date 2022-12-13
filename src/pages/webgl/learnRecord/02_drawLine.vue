@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { defineRouteMeta } from '@fesjs/fes';
 import { onMounted, ref } from 'vue';
 
-import { Base3d } from '../service';
+import { Base3d, animate } from '../service';
 
 defineRouteMeta({
     name: '02_drawLine',
@@ -54,11 +54,6 @@ onMounted(() => {
 
     threeD.setAxisHelper();
 
-    const animate = () => {
-        threeD.renderer.render(threeD.scene, threeD.camera);
-        requestAnimationFrame(animate); //请求再次执行渲染函数render
-    };
-
-    animate();
+    animate(threeD);
 });
 </script>
