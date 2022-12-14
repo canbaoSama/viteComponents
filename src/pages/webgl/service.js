@@ -109,6 +109,22 @@ export class Base3d {
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }
 }
+
+// 将 "123" 这样的字符串转换为 123 这样的数字
+export class StringToNumberHelper {
+    constructor(obj, prop) {
+        this.obj = obj;
+        this.prop = prop;
+    }
+    get value() {
+        return this.obj[this.prop];
+    }
+    set value(v) {
+        this.obj[this.prop] = parseFloat(v);
+    }
+}
+
+// li-gui 坐标系
 export class AxisGridHelper {
     constructor(node, units = 10) {
         const axes = new THREE.AxesHelper();
@@ -135,6 +151,21 @@ export class AxisGridHelper {
     }
 }
 
+// li-gui 纹理控制
+export class DegRadHelper {
+    constructor(obj, prop) {
+        this.obj = obj;
+        this.prop = prop;
+    }
+    get value() {
+        return THREE.MathUtils.radToDeg(this.obj[this.prop]);
+    }
+    set value(v) {
+        this.obj[this.prop] = THREE.MathUtils.degToRad(v);
+    }
+}
+
+// 默认动画
 export function animate(threeD) {
     const animateFunc = () => {
         threeD.renderer.render(threeD.scene, threeD.camera);
