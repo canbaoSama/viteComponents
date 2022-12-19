@@ -50,7 +50,7 @@ onMounted(() => {
         });
         const mesh = new THREE.Mesh(planeGeo, planeMat);
         planePivot.add(mesh);
-        // move plane so top left corner is origin
+        // 调整平面使得左上角为原点
         mesh.position.set(planeSize / 2, planeSize / 2, 0);
         return planePivot;
     });
@@ -77,21 +77,21 @@ onMounted(() => {
         const distAcross = Math.max(20, canvas.value.width - planeSize);
         const distDown = Math.max(20, canvas.value.height - planeSize);
 
-        // total distance to move across and back
+        // 来回运动的总距离
         const xRange = distAcross * 2;
         const yRange = distDown * 2;
         const speed = 180;
 
         planes.forEach((plane, ndx) => {
-            // compute a unique time for each plane
+            // 为每个平面单独计算时间
             const t = time * speed + ndx * 300;
 
-            // get a value between 0 and range
+            // 在0到最远距离之间获取一个值
             const xt = t % xRange;
             const yt = t % yRange;
 
-            // set our position going forward if 0 to half of range
-            // and backward if half of range to range
+            // 0到距离的一半, 向前运动
+            // 另一半的时候往回运动
             const x = xt < distAcross ? xt : xRange - xt;
             const y = yt < distDown ? yt : yRange - yt;
 
