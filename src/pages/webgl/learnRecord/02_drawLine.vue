@@ -1,6 +1,6 @@
 <template>
     <div class="webgl-02-drawLine public-absolute-full-container flex justify-center align-middle">
-        <canvas ref="canvas" class="bg-black w-full h-full"></canvas>
+        <canvas ref="canvas" class="bg-black"></canvas>
     </div>
 </template>
 <script setup>
