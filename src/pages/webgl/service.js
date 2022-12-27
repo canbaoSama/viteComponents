@@ -4,6 +4,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; //导入GLTF
 
 import { WEBGL } from '@/common/WebGL';
 
+export const onWindowResize = (container, camera, renderer) => {
+    //调整屏幕大小
+    camera.aspect = container.clientWidth / container.clientHeight; //摄像机宽高比例
+    camera.updateProjectionMatrix(); //相机更新矩阵，将3d内容投射到2d面上转换
+    renderer.setSize(container.clientWidth, container.clientHeight);
+};
+
 // 公共的基础类，满足简单需求
 export class Base3d {
     default_bg = 0xb9d3ff;
@@ -27,7 +34,7 @@ export class Base3d {
         //初始化控制器，控制摄像头,控制器一定要在渲染器后
         this.initControls();
         //监听场景大小改变，跳转渲染尺寸
-        window.addEventListener('resize', this.onWindowResize.bind(this));
+        window.addEventListener('resize', onWindowResize(this.container, this.camera, this.renderer));
     }
     initScene() {
         this.scene = new THREE.Scene();
@@ -102,12 +109,6 @@ export class Base3d {
             );
         });
     }
-    onWindowResize() {
-        //调整屏幕大小
-        this.camera.aspect = this.container.clientWidth / this.container.clientHeight; //摄像机宽高比例
-        this.camera.updateProjectionMatrix(); //相机更新矩阵，将3d内容投射到2d面上转换
-        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    }
 }
 
 // 将 "123" 这样的字符串转换为 123 这样的数字
@@ -167,6 +168,8 @@ export class DegRadHelper {
 
 // 默认动画
 export function animate(threeD) {
+    window.addEventListener('resize', onWindowResize(threeD.container, threeD.camera, threeD.renderer));
+
     const animateFunc = () => {
         threeD.renderer.render(threeD.scene, threeD.camera);
         requestAnimationFrame(animateFunc);

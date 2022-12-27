@@ -42,6 +42,7 @@ export default {
                     { name: '05_scenarios', title: '场景图' },
                     { name: '06_texture', title: '纹理贴图' },
                     { name: '07_camera', title: '摄像机' },
+                    { name: '08_renderTarget', title: '渲染目标' },
                 ],
             },
         ],
