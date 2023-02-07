@@ -35,10 +35,11 @@
 经过增量标记之后，垃圾回收机制对js的阻塞时间降低至原来的1/6
 
 ### 事件循环机制
+<img src="../../public/事件循环.png" >
+
 1. 函数入栈，当Stack中执行到异步任务的时候，就将他丢给WebAPIs,接着执行同步任务,直到Stack为空;
 2. 在此期间WebAPIs完成这个事件，把回调函数放入CallbackQueue中等待;
 3. 当执行栈为空时，Event Loop把Callback Queue中的一个任务放入Stack中,回到第1步。
-<img src="../../public/事件循环.png" >
 4. Event Loop是由javascript宿主环境（像浏览器）来实现的;
 5. WebAPIs是由C++实现的浏览器创建的线程，处理诸如DOM事件、http请求、定时器等异步事件;
 6. JavaScript 的并发模型基于"事件循环";
