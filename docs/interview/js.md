@@ -44,3 +44,21 @@
 5. WebAPIs是由C++实现的浏览器创建的线程，处理诸如DOM事件、http请求、定时器等异步事件;
 6. JavaScript 的并发模型基于"事件循环";
 7. Callback Queue(Event Queue 或者 Message Queue) 任务队列,存放异步任务的回调函数
+
+### Promise.all、Promise.race、Promise.any的区别
+- all： 成功的时候返回的是一个结果数组，而失败的时候则返回最先被reject失败状态的值。
+- race： 哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。
+- any： 返回最快的成功结果，如果全部失败就返回失败结果。
+
+### await 到底在等待什么?
+await 等待的是一个表达式，这个表达式的计算结果是 Promise 对象或者其它值（换句话说，就是没有特殊限定）。await 不仅仅用于等 Promise 对象，它可以等任意表达式的结果，所以，await 后面实际是可以接普通函数调用或者直接量的。
+await 表达式的运算结果取决于它等的是什么。
+
+- 如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的东西。
+- 如果它等到的是一个 Promise 对象，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，然后得到 resolve 的值，作为 await 表达式的运算结果。
+
+### Promise 和 await 需要注意的点
+- promise本身是一个同步的代码，只有它后面调用的then()方法里面的回调才是微任务
+- then方法需要Promise里的resolve传值才会执行
+- await右边的表达式还是会立即执行,表达式之后的代码才是微任务, await微任务可以转换成等价的promise微任务分析
+- script标签本身是一个宏任务， 当页面出现多个script标签的时候，浏览器会把script标签作为宏任务来解析
