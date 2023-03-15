@@ -2,7 +2,7 @@
 1. 反射型（非持久）：通过URL参数直接注入
 2. 存储型（持久）：存储到数据库后读取时注入
 3. 基于DOM：被执行的恶意脚本会修改页面脚本结构
-4. 
+
 ### XSS的注入点
 1. HTML的节点内容或属性
 2. javascript代码
@@ -41,6 +41,7 @@
 ```html
 <a href="https://bank.com/sendmoney?amount=1000&user=hacker" target="_blank">特大新闻！！！点我查看！！！<a/>
 ```
+
 
 ### CSRF攻击过程
 一个典型的CSRF攻击过程如下：

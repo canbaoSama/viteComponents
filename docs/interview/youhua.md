@@ -23,4 +23,5 @@
 3. css能干的事情，尽量不要用JavaScript来干。毕竟JavaScript的解析执行过于直接和粗暴，而css效率更高。
 4. 尽可能压缩的js文件，减少资源下载的负担
 5. 尽可能避免在js中逐条操作dom样式，尽可能预定义好css样式，然后通过改变样式名来修改dom样式，这样集中式的操作能减少reflow或repaint的次数。
-6. 尽可能少的在js中创建dom，而是预先埋到HTML中用display:none来隐藏，在js中按需调用，减少js对dom的暴力操作。
+6. 尽可能少的在js中创建dom，而是预55
+7. 先埋到HTML中用display:none来隐藏，在js中按需调用，减少js对dom的暴力操作。
