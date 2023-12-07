@@ -1,0 +1,59 @@
+{
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "eslint.workingDirectories": [],
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "files.associations": {
+    "*.vue": "vue",
+    "*.wxa": "wxa"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue",
+    "wxa",
+    "typescript",
+    "jsx"
+  ],
+  "eslint.runtime": "",
+  "git.path": "C:/Program Files/Git/bin/git.exe",
+  "git.autofetch": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+    // "source.fixAll": true,
+    // "eslint.autoFixOnSave": true
+  },
+  "explorer.confirmDelete": false,
+  "eslint.debug": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "files.eol": "\n",
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "onFocusChange",
+  "eslint.alwaysShowStatus": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "powermode.enabled": true, //启动
+  "powermode.presets": "flames", // 火花效果
+  "powermode.shake.enabled": false,
+  "powermode.combo.counterEnabled": "hide",
+  "powermode.combo.timerEnabled": "hide",
+  "fauxpilot.maxTokens": 128,
+  "fauxpilot.server": "http://codegen.xwbx.ink:62005/v1/engines",
+  "fauxpilot.suggestionDelay": 200,
+  "liveServer.settings.donotShowInfoMsg": true
+}

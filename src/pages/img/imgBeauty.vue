@@ -2,7 +2,10 @@
     <div class="public-template">
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="getMajorColor">
-                <template #tab> <BgColorsOutlined />获取图片主颜色 </template>
+                <template #tab>
+                    <BgColorsOutlined />
+                    获取图片主颜色
+                </template>
                 <div class="tab-container">
                     <getMajorColor />
                 </div>

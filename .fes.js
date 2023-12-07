@@ -45,6 +45,16 @@ export default {
                     { name: '08_renderTarget', title: '渲染目标' },
                 ],
             },
+            {
+                name: 'css',
+                title: 'css 特效',
+                children: [
+                    { name: 'textRain', title: '文字雨滴' },
+                    { name: 'menuHover', title: '菜单导航悬浮交互' },
+                    { name: 'fruitCarousel', title: '水果风味的苏打水轮播' },
+                    { name: 'coneLight', title: '锥形探照灯' },
+                ],
+            },
         ],
     },
     enums: {
